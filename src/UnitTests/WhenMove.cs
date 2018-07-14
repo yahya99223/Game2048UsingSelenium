@@ -1,5 +1,4 @@
-﻿
-using Game2048;
+﻿using Game2048;
 using NUnit.Framework;
 
 namespace UnitTests

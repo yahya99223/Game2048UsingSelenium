@@ -1,2 +1,7 @@
 .vs
 /src/Game2048UsingSelenium/bin/Debug
+/src/Game2048/bin/Debug
+/src/Game2048/obj/Debug
+/src/packages
+/src/UnitTests/bin/Debug/netcoreapp2.0
+/src/UnitTests/obj
