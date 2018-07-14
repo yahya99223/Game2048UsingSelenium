@@ -5,3 +5,5 @@
 /src/packages
 /src/UnitTests/bin/Debug/netcoreapp2.0
 /src/UnitTests/obj
+obj
+bin

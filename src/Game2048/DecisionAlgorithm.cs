@@ -12,19 +12,19 @@ namespace Game2048
         {
             Dictionary<Movement, double> keyValuePairs = new Dictionary<Movement, double>();
             var tempBoard = Move(board, Movement.Up);
-            if (board != tempBoard)
+            if (!board.Equals(tempBoard))
                 keyValuePairs.Add(Movement.Up, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
 
             tempBoard = Move(board, Movement.Right);
-            if (board != tempBoard)
+            if (!board.Equals(tempBoard))
                 keyValuePairs.Add(Movement.Right, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
 
             tempBoard = Move(board, Movement.Down);
-            if (board != tempBoard)
+            if (!board.Equals(tempBoard))
                 keyValuePairs.Add(Movement.Down, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
 
             tempBoard = Move(board, Movement.Left);
-            if (board != tempBoard)
+            if (!board.Equals(tempBoard))
                 keyValuePairs.Add(Movement.Left, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
             //return movement that have best children
             return keyValuePairs.ToList().OrderByDescending(c => c.Value).FirstOrDefault().Key;
