@@ -38,11 +38,10 @@ namespace Game2048
                         {
                             sum += 0.2 * tilesWithBorders[i, j];
                         }
-                        else
-                            if (neighbour / 4 == tilesWithBorders[i, j] || neighbour * 4 == tilesWithBorders[i, j])
-                        {
-                            sum += 0.05 * Math.Min(tilesWithBorders[i, j], neighbour);
-                        }
+                    }
+                    if(neighbours.All(x=>x>tilesWithBorders[i,j]))
+                    {
+                        sum -= 10;
                     }
                 }
             }
