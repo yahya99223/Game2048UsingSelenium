@@ -31,17 +31,17 @@ namespace Game2048
                         else
                             if (neighbour == tilesWithBorders[i, j])
                         {
-                            sum += 0.5 * neighbour;
+                            sum += 0.1 * neighbour;
                         }
                         else
                             if (neighbour / 2 == tilesWithBorders[i, j])
                         {
-                            sum += 0.2 * tilesWithBorders[i, j];
+                            sum += 0.01 * tilesWithBorders[i, j];
                         }
                     }
                     if(neighbours.All(x=>x>tilesWithBorders[i,j]))
                     {
-                        sum -= 10;
+                        sum -= 2;
                     }
                 }
             }
