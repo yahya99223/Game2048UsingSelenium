@@ -31,17 +31,17 @@ namespace Game2048
                         else
                             if (neighbour == tilesWithBorders[i, j])
                         {
-                            sum += 0.1 * neighbour;
+                            sum += 0.01 * neighbour;
                         }
                         else
                             if (neighbour / 2 == tilesWithBorders[i, j])
                         {
-                            sum += 0.01 * tilesWithBorders[i, j];
+                            sum += 0.001 * tilesWithBorders[i, j];
                         }
                     }
                     if(neighbours.All(x=>x>tilesWithBorders[i,j]))
                     {
-                        sum -= 2;
+                        sum -= 10;
                     }
                 }
             }
@@ -77,7 +77,7 @@ namespace Game2048
                     sum += (long)(key * values[key] * (multiplicationFactor(key)));
                     if (key == 0)
                     {
-                        sum += 1 * values[key];
+                        sum += values[key];
                     }
                     else
                     if (key == 2 )
@@ -86,6 +86,7 @@ namespace Game2048
                     }
                 }
             }
+            
             return sum;
         }
         static int multiplicationFactor(int number)

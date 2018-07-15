@@ -24,14 +24,14 @@ namespace Game2048
             if (!board.Equals(tempBoard))
             {
                 var score = alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity);
-                keyValuePairs.Add(Movement.Left, 0.85 * score);
+                keyValuePairs.Add(Movement.Left, 0.99 * score);
             }
 
             tempBoard = Move(board, Movement.Down);
             if (!board.Equals(tempBoard))
             {
                 var score = alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity);
-                keyValuePairs.Add(Movement.Down, 0.8 * score);
+                keyValuePairs.Add(Movement.Down, 0.98 * score);
             }
             //return movement that have best children
             return keyValuePairs.ToList().OrderByDescending(c => c.Value).FirstOrDefault().Key;

@@ -27,7 +27,7 @@ namespace Game2048UsingSelenium
                 var board = gamePage.GetBoard();
                 DecisionAlgorithm algo = new DecisionAlgorithm();
                 AlphaBetaPruningAlgorithm alphaBeta = new AlphaBetaPruningAlgorithm();
-                var movement = algo.Decide(board, 2);
+                var movement = algo.Decide(board,2);
                 if (movement == DecisionAlgorithm.Movement.Up)
                 {
                     driver.FindElement(By.TagName("body")).SendKeys(Keys.ArrowUp);
