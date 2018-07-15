@@ -77,7 +77,7 @@ namespace Game2048
                     sum += (long)(key * values[key] * (multiplicationFactor(key)));
                     if (key == 0)
                     {
-                        sum += 5 * values[key];
+                        sum += 1 * values[key];
                     }
                     else
                     if (key == 2 )
