@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Game2048\Game2048.csproj" />
+    <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
   </ItemGroup>
 
 </Project>

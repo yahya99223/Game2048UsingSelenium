@@ -1,5 +1,6 @@
 ﻿using Game2048;
 using NUnit.Framework;
+using Shared.Core;
 
 namespace UnitTests
 {
@@ -32,31 +33,31 @@ namespace UnitTests
             upBoard.Cells = new int[,] { { 2, 4, 2, 4 }, { 0, 0, 4, 16 }, { 0, 0, 16, 0 }, { 0, 0, 8, 0 } };
             var result =new Board() { Cells = new int[,] { { 2, 0, 4, 8 }, { 0, 0, 4, 8 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } } };
             var result2 = new Board() { Cells = new int[,] { { 2, 0, 8, 16 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } } };
-            Assert.IsTrue(compareBorads(algo.Move(testBoard, DecisionAlgorithm.Movement.Up), upBoard));
-            Assert.IsTrue(compareBorads(algo.Move(upBoard, DecisionAlgorithm.Movement.Up), upBoard));
-            Assert.IsTrue(compareBorads(algo.Move(testBoard2, DecisionAlgorithm.Movement.Up), result));
-            Assert.IsTrue(compareBorads(algo.Move(result, DecisionAlgorithm.Movement.Up), result2));
+            Assert.IsTrue(compareBorads(algo.Play(testBoard, MovementDirection.Up), upBoard));
+            Assert.IsTrue(compareBorads(algo.Play(upBoard, MovementDirection.Up), upBoard));
+            Assert.IsTrue(compareBorads(algo.Play(testBoard2, MovementDirection.Up), result));
+            Assert.IsTrue(compareBorads(algo.Play(result, MovementDirection.Up), result2));
         }
         [Test]
         public void ThenMoveDownCorrectly()
         {
             downBoard.Cells = new int[,] { { 0, 0, 2, 0 }, { 0, 0, 4, 0 }, { 0, 0, 16, 4 }, { 2, 4, 8, 16 } };
-            Assert.IsTrue(compareBorads(algo.Move(testBoard, DecisionAlgorithm.Movement.Down), downBoard));
-            Assert.IsTrue(compareBorads(algo.Move(downBoard, DecisionAlgorithm.Movement.Down), downBoard));
+            Assert.IsTrue(compareBorads(algo.Play(testBoard, MovementDirection.Down), downBoard));
+            Assert.IsTrue(compareBorads(algo.Play(downBoard, MovementDirection.Down), downBoard));
         }
         [Test]
         public void ThenMoveLeftCorrectly()
         {
             leftBoard.Cells = new int[,] { { 2, 4, 0, 0 }, { 2, 4, 8, 0 }, { 4, 16, 0, 0 }, { 16, 0, 0, 0 } };
-            Assert.IsTrue(compareBorads(algo.Move(testBoard, DecisionAlgorithm.Movement.Left), leftBoard));
-            Assert.IsTrue(compareBorads(algo.Move(leftBoard, DecisionAlgorithm.Movement.Left), leftBoard));
+            Assert.IsTrue(compareBorads(algo.Play(testBoard, MovementDirection.Left), leftBoard));
+            Assert.IsTrue(compareBorads(algo.Play(leftBoard, MovementDirection.Left), leftBoard));
         }
         [Test]
         public void ThenMoveRightCorrectly()
         {
             rightBoard.Cells = new int[,] { { 0, 0, 2, 4 }, { 0, 2, 4, 8 }, { 0, 0, 4, 16 }, { 0, 0, 0, 16 } };
-            Assert.IsTrue(compareBorads(algo.Move(testBoard, DecisionAlgorithm.Movement.Right), rightBoard));
-            Assert.IsTrue(compareBorads(algo.Move(rightBoard, DecisionAlgorithm.Movement.Right), rightBoard));
+            Assert.IsTrue(compareBorads(algo.Play(testBoard, MovementDirection.Right), rightBoard));
+            Assert.IsTrue(compareBorads(algo.Play(rightBoard, MovementDirection.Right), rightBoard));
         }
 
         bool compareBorads(Board board1, Board board2)

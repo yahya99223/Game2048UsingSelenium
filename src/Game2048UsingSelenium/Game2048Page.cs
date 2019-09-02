@@ -4,17 +4,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
+using Shared.Core;
 
 namespace Game2048UsingSelenium
 {
-   public class Game2048Page
+    public class Game2048Page
     {
         IWebDriver driver;
-        public Game2048Page(IWebDriver driver)
+        public Game2048Page()
         {
-            this.driver = driver;
+            this.driver = WebDriver.Driver;
             NavigateTo();
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(ExpectedConditions.ElementExists((By.ClassName("tile"))));
         }
         public void NavigateTo()
         {
@@ -26,8 +26,8 @@ namespace Game2048UsingSelenium
             var board = new Board();
             foreach (var tile in tiles)
             {
-                var postition = tile.GetAttribute("class");
-                var classes = postition.Split(' ');
+                var position = tile.GetAttribute("class");
+                var classes = position.Split(' ');
                 int x = 0, y = 0, val = 0;
                 foreach (var className in classes)
                 {
@@ -47,6 +47,29 @@ namespace Game2048UsingSelenium
                 board.Cells[x - 1, y - 1] = val;
             }
             return board;
+        }
+
+        public void MoveTo(MovementDirection movement)
+        {
+            if (movement == MovementDirection.Up)
+            {
+                driver.FindElement(By.TagName("body")).SendKeys(Keys.ArrowUp);
+            }
+            else
+            if (movement == MovementDirection.Right)
+            {
+                driver.FindElement(By.TagName("body")).SendKeys(Keys.ArrowRight);
+            }
+            else
+            if (movement == MovementDirection.Down)
+            {
+                driver.FindElement(By.TagName("body")).SendKeys(Keys.ArrowDown);
+            }
+            else
+            if (movement == MovementDirection.Left)
+            {
+                driver.FindElement(By.TagName("body")).SendKeys(Keys.ArrowLeft);
+            }
         }
     }
 }

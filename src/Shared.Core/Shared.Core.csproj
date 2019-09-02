@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5A0E06A7-8AE2-41E6-B258-6D8267BB6ACA}</ProjectGuid>
+    <ProjectGuid>{7B976BB1-E810-4AAA-8F31-D112F8295C74}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game2048</RootNamespace>
-    <AssemblyName>Game2048</AssemblyName>
+    <RootNamespace>Shared.Core</RootNamespace>
+    <AssemblyName>Shared.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,17 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlphaBetaPruningAlgorithm.cs" />
-    <Compile Include="Board.cs" />
-    <Compile Include="BoardEvaluator.cs" />
-    <Compile Include="DecisionAlgorithm.cs" />
+    <Compile Include="MovementDirection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Shared.Core\Shared.Core.csproj">
-      <Project>{7B976BB1-E810-4AAA-8F31-D112F8295C74}</Project>
-      <Name>Shared.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

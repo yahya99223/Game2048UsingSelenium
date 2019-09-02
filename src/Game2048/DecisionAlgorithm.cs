@@ -1,6 +1,8 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Shared.Core;
 
 namespace Game2048
 {
@@ -8,38 +10,22 @@ namespace Game2048
     {
         AlphaBetaPruningAlgorithm alphaBeta = new AlphaBetaPruningAlgorithm();
 
-        public Movement? Decide(Board board, int depth)
+        public MovementDirection? DecideBestMove(Board board, int depth)
         {
-            Dictionary<Movement, double> keyValuePairs = new Dictionary<Movement, double>();
-            var tempBoard = Move(board, Movement.Up);
-            if (!board.Equals(tempBoard))
-                keyValuePairs.Add(Movement.Up, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
-
-            tempBoard = Move(board, Movement.Right);
-            if (!board.Equals(tempBoard))
-                keyValuePairs.Add(Movement.Right, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
-
-
-            tempBoard = Move(board, Movement.Left);
-            if (!board.Equals(tempBoard))
+            Dictionary<MovementDirection, double> movementsScores = new Dictionary<MovementDirection, double>();
+            foreach (MovementDirection direction in (MovementDirection[])Enum.GetValues(typeof(MovementDirection)))
             {
-                var score = alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity);
-                keyValuePairs.Add(Movement.Left, 0.99 * score);
+                var tempBoard = Play(board, direction);
+                if (!board.Equals(tempBoard))
+                    movementsScores.Add(direction, alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity));
             }
-
-            tempBoard = Move(board, Movement.Down);
-            if (!board.Equals(tempBoard))
-            {
-                var score = alphaBeta.Search(tempBoard, depth, double.NegativeInfinity, double.PositiveInfinity);
-                keyValuePairs.Add(Movement.Down, 0.98 * score);
-            }
-            //return movement that have best children
-            return keyValuePairs.ToList().OrderByDescending(c => c.Value).FirstOrDefault().Key;
+            //return movement that has best score
+            return movementsScores.ToList().OrderByDescending(c => c.Value).FirstOrDefault().Key;
         }
-        public Board Move(Board board, Movement movement)
+        public Board Play(Board board, MovementDirection movement)
         {
             var tempBoard = board.Clone();
-            if (movement == Movement.Up)
+            if (movement == MovementDirection.Up)
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -75,7 +61,7 @@ namespace Game2048
                 }
             }
             else
-                 if (movement == Movement.Down)
+                 if (movement == MovementDirection.Down)
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -111,7 +97,7 @@ namespace Game2048
                 }
             }
             else
-                 if (movement == Movement.Right)
+                 if (movement == MovementDirection.Right)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -147,7 +133,7 @@ namespace Game2048
                 }
             }
             else
-                 if (movement == Movement.Left)
+                 if (movement == MovementDirection.Left)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -184,6 +170,5 @@ namespace Game2048
             }
             return tempBoard;
         }
-        public enum Movement { Up, Right, Down, Left }
     }
 }
