@@ -15,7 +15,7 @@ namespace Game2048UsingSelenium
             {
                 Thread.Sleep(200);
                 var board = gamePage.GetBoard();
-                var movement = algo.DecideBestMove(board, 4);
+                var movement = algo.DecideBestMove(board, 2);
                 if (movement != null)
                     gamePage.MoveTo((MovementDirection)movement);
                 else
