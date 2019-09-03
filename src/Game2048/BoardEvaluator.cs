@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Game2048
 {
@@ -9,7 +11,7 @@ namespace Game2048
         {
 
             Dictionary<int, int> values = new Dictionary<int, int>();
-            double sum = 0;
+            double sum = 128;
             var tilesWithBorders = getWithBorders(board.Cells);
             //check if tiles that can be merged are adjacent
             for (int i = 1; i < 5; i++)
@@ -30,17 +32,13 @@ namespace Game2048
                         else
                             if (neighbour == tilesWithBorders[i, j])
                         {
-                            sum += 0.01 * neighbour;
+                            sum += 2;
                         }
                         else
                             if (neighbour / 2 == tilesWithBorders[i, j])
                         {
                             sum += 0.001 * tilesWithBorders[i, j];
                         }
-                    }
-                    if(neighbours.All(x=>x>tilesWithBorders[i,j]))
-                    {
-                        sum -= 10;
                     }
                 }
             }
@@ -71,21 +69,21 @@ namespace Game2048
             }
             else
             {
+                //add points to empty cells 
                 foreach (var key in values.Keys.ToList().OrderByDescending(x => x))
                 {
                     sum += (long)(key * values[key] * (multiplicationFactor(key)));
                     if (key == 0)
                     {
-                        sum += values[key];
+                        sum += values[key] * 128;
                     }
                     else
-                    if (key == 2 )
                     {
-                        sum -= 0.1 * values[key];
+                        sum += Math.Log(key) * 4;
                     }
                 }
             }
-            
+
             return sum;
         }
         static int multiplicationFactor(int number)
@@ -93,7 +91,7 @@ namespace Game2048
             int count = 0;
             while (number != 1 && number != 0)
             {
-                number /= 2;
+                number /= 4;
                 count++;
             }
             return count;
